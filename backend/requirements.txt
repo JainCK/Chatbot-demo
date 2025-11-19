@@ -6,3 +6,5 @@ huggingface_hub
 langchain-core
 langgraph
 redis
+sentence-transformers
+aiohttp

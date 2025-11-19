@@ -16,6 +16,11 @@ app.add_middleware(
 # Include Routers
 app.include_router(chat.router, prefix="/chat", tags=["Chat"])
 
+@app.on_event("startup")
+async def startup_event():
+    from core.cache_service import create_index
+    create_index()
+
 @app.get("/")
 async def root():
     return {"message": "Arcnetic AI Persona API is running"}

@@ -27,6 +27,22 @@ async def chat_message(request: ChatRequest):
     # Add user message to history
     add_message_to_history(request.session_id, "user", request.message)
 
+    # Check Cache
+    from core.cache_service import semantic_search, cache_response
+    cached_response = await semantic_search(request.message)
+    
+    if cached_response:
+        # Return cached response as a stream (simulated)
+        async def stream_cached():
+            yield cached_response
+            # Add to history
+            add_message_to_history(request.session_id, "assistant", cached_response)
+            
+        return StreamingResponse(
+            stream_cached(),
+            media_type="text/event-stream"
+        )
+
     # Generate the stream and save assistant response (this is tricky with streaming)
     # For a simple prototype, we might need to aggregate the stream to save it, 
     # or use a callback. For now, we will stream and let the client handle display,
@@ -35,11 +51,13 @@ async def chat_message(request: ChatRequest):
     
     async def stream_with_memory():
         full_response = ""
-        for chunk in generate_stream(messages):
+        async for chunk in generate_stream(messages):
             full_response += chunk
             yield chunk
         # Save assistant message after streaming is complete
         add_message_to_history(request.session_id, "assistant", full_response)
+        # Save to cache
+        await cache_response(request.message, full_response)
 
     return StreamingResponse(
         stream_with_memory(),

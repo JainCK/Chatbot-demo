@@ -1,67 +1,164 @@
 {
 	"info": {
 		"_postman_id": "e23edded-9d5f-40d8-b38b-174f4a78ee55",
-		"name": "Arcnetic AI Persona Demo",
+		"name": "Arcnetic AI Persona Demo (Phase 2)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Chat Message (Medical)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"message\": \"I have a headache and fever.\",\n    \"session_id\": \"test_session_1\",\n    \"persona\": \"medical\"\n}"
+			"name": "Personas",
+			"item": [
+				{
+					"name": "SaaS Advisor (Tech Stack)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"We need to scale our database.\",\n    \"session_id\": \"saas_1\",\n    \"persona\": \"saas_advisor\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/chat/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"chat",
+								"message"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8000/chat/message",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"chat",
-						"message"
-					]
+				{
+					"name": "E-com Support (Cross-sell)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"I want a red hoodie.\",\n    \"session_id\": \"ecom_1\",\n    \"persona\": \"ecom_support\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/chat/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"chat",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Real Estate (ROI)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"What is the ROI on a duplex?\",\n    \"session_id\": \"re_1\",\n    \"persona\": \"real_estate_agent\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/chat/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"chat",
+								"message"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Chat Message (SaaS Sales)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"message\": \"Why should I buy your product?\",\n    \"session_id\": \"test_session_2\",\n    \"persona\": \"saas_advisor\"\n}"
+			"name": "Cache Tests",
+			"item": [
+				{
+					"name": "Cache Miss (First Call)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Explain semantic caching.\",\n    \"session_id\": \"cache_test\",\n    \"persona\": \"general\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/chat/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"chat",
+								"message"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8000/chat/message",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8000",
-					"path": [
-						"chat",
-						"message"
-					]
+				{
+					"name": "Cache Hit (Second Call)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Explain semantic caching.\",\n    \"session_id\": \"cache_test\",\n    \"persona\": \"general\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/chat/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"chat",
+								"message"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
         {
 			"name": "Health Check",
